@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Maintenance Web App Diagram</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.entity, .relationship {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 6px;
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
+    margin: 0; /* Remove default margin */
+}
+
+.entity:hover, .relationship:hover {
+    background-color: #e0f7fa;
+    transform: scale(1.02);
+}
+
+.entity h3, .relationship h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #00796b;
+}
+
+.relationship {
+    background-color: #e8f5e9;
+    border-left: 4px solid #66bb6a;
+}
+
+.section-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #004d40;
+    border-bottom: 2px solid #00796b;
+    padding-bottom: 8px;
+}
+
+.entity p, .relationship p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.container > div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .container > div {
+        flex: 1;
+        min-width: 280px;
+    }
+}
+
+@media (max-width: 600px) {
+    .container > div {
+        gap: 10px; /* Adjust gap for smaller screens */
+    }
+}
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div>
+        <h2 class="section-title">Cart</h2>
+        <div class="entity">
+            <h3>Cart</h3>
+            <p><strong>Attributes:</strong> cartId, userId, totalPrice, dateCreated</p>
+            <p><strong>Relationships:</strong> User has one Cart, Cart has many CartItems</p>
+        </div>
+        <div class="entity">
+            <h3>CartItem</h3>
+            <p><strong>Attributes:</strong> cartItemId, cartId, serviceId, quantity, price</p>
+            <p><strong>Relationships:</strong> Cart has many CartItems, CartItem relates to Service</p>
+        </div>
+    </div>
+
+    <div>
+        <h2 class="section-title">Login, Sign up, Dashboard</h2>
+        <div class="entity">
+            <h3>User</h3>
+            <p><strong>Attributes:</strong> userId, name, email, password, phoneNumber, address, role (admin/user)</p>
+            <p><strong>Relationships:</strong> User has one Dashboard, User has one Cart</p>
+        </div>
+        <div class="entity">
+            <h3>Dashboard</h3>
+            <p><strong>Attributes:</strong> dashboardId, userId, recentActivity, preferredServices</p>
+            <p><strong>Relationships:</strong> User has one Dashboard</p>
+        </div>
+        <div class="entity">
+            <h3>Authentication</h3>
+            <p><strong>Attributes:</strong> authId, userId, loginTimestamp, logoutTimestamp, authToken</p>
+            <p><strong>Relationships:</strong> User has one Authentication</p>
+        </div>
+    </div>
+
+    <div>
+        <h2 class="section-title">User Interaction Trace</h2>
+        <div class="entity">
+            <h3>ServiceBooking</h3>
+            <p><strong>Attributes:</strong> bookingId, userId, serviceId, bookingTime, serviceTime, location, status</p>
+            <p><strong>Relationships:</strong> User has many ServiceBookings, Service has many ServiceBookings</p>
+        </div>
+        <div class="entity">
+            <h3>Location</h3>
+            <p><strong>Attributes:</strong> locationId, bookingId, address, latitude, longitude</p>
+            <p><strong>Relationships:</strong> ServiceBooking has one Location</p>
+        </div>
+        <div class="entity">
+            <h3>ServiceInteraction</h3>
+            <p><strong>Attributes:</strong> interactionId, bookingId, interactionTime, notes</p>
+            <p><strong>Relationships:</strong> ServiceBooking has many ServiceInteractions</p>
+        </div>
+    </div>
+
+    <div>
+        <h2 class="section-title">Home Services</h2>
+        <div class="entity">
+            <h3>Service</h3>
+            <p><strong>Attributes:</strong> serviceId, serviceName, description, price, categoryId</p>
+            <p><strong>Relationships:</strong> Category has many Services, Service has many ServiceBookings</p>
+        </div>
+        <div class="entity">
+            <h3>Category</h3>
+            <p><strong>Attributes:</strong> categoryId, categoryName, description</p>
+            <p><strong>Relationships:</strong> Category has many Services</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
